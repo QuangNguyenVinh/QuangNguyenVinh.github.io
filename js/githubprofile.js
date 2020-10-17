@@ -37,7 +37,6 @@ function createUserCard(user){
     `;
 
     content.innerHTML = userCard;
-    console.log(userCard);
 }
 async function getRepos(userName) {
     return await fetch(API_GITHUB_PROFILE + userName + "/repos").then(res => {

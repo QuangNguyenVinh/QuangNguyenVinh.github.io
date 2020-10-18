@@ -10,7 +10,7 @@ showProfile(USER_DEFAULT);
 async function getUser(username) {
 
     return await fetch(API_GITHUB_PROFILE + username).then(res => {
-        if(res.status === 200){
+        if(res && res.status === 200){
             return res.json();
         }
     });
@@ -37,10 +37,11 @@ function createUserCard(user){
     `;
 
     content.innerHTML = userCard;
+    console.log(userCard);
 }
 async function getRepos(userName) {
     return await fetch(API_GITHUB_PROFILE + userName + "/repos").then(res => {
-        if(res.status === 200){
+        if(res && res.status === 200){
             return res.json();
         }
     });
@@ -65,11 +66,17 @@ function addReposToCard(repos) {
 function showProfile(userName)
 {
     getUser(userName).then(res => {
-        createUserCard(res);
+        if(res){
+            createUserCard(res);
+        }
+            
     });
 
     getRepos(userName).then(res => {
-        addReposToCard(res);
+        if(res){
+            addReposToCard(res);
+        }
+        
     });
 }
 
